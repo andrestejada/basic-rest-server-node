@@ -7,7 +7,8 @@ class Server {
         this.app = express()
         this.port = process.env.PORT
         this.usuariosPath ='/api/usuarios'
-        //concetar base de datos
+        this.authPath ='/api/auth'
+        //conectar base de datos
         this.conectarDB()
         //Middleware
         this.middleware()
@@ -27,6 +28,7 @@ class Server {
 
     routes(){
        this.app.use( this.usuariosPath , require('../routes/usuarios'))
+       this.app.use( this.authPath , require('../routes/auth'))
     }
 
     async conectarDB(){
