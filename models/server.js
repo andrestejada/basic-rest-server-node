@@ -6,8 +6,15 @@ class Server {
     constructor(){
         this.app = express()
         this.port = process.env.PORT
-        this.usuariosPath ='/api/usuarios'
-        this.authPath ='/api/auth'
+        //rutas
+        this.paths={
+            authPath:       '/api/auth',
+            buscarPath:       '/api/buscar',
+            categoriaPath:  '/api/categorias',
+            usuariosPath:   '/api/usuarios',
+            productosPath:   '/api/productos',
+        }       
+        
         //conectar base de datos
         this.conectarDB()
         //Middleware
@@ -27,8 +34,11 @@ class Server {
     }
 
     routes(){
-       this.app.use( this.usuariosPath , require('../routes/usuarios'))
-       this.app.use( this.authPath , require('../routes/auth'))
+        this.app.use( this.paths.authPath , require('../routes/auth'))
+        this.app.use( this.paths.buscarPath , require('../routes/buscar'))
+        this.app.use( this.paths.usuariosPath , require('../routes/usuarios'))
+        this.app.use( this.paths.categoriaPath, require('../routes/categorias'))
+        this.app.use( this.paths.productosPath, require('../routes/productos'))
     }
 
     async conectarDB(){
