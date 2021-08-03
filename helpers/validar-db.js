@@ -32,10 +32,19 @@ const isProductExist = async(id)=>{
     }
 }
 
+const coleccionesPermitidas=(coleccion,colecciones=[])=>{
+    const coleccionPermitida = colecciones.includes(coleccion)
+    if(!coleccionPermitida){
+        throw new Error(`la coleccion ${coleccion}no es valida la colecciones validas son ${colecciones}`)
+    }
+    return true
+}
+
 module.exports ={
     isRoleValido,
     isEmailExist,
     isUserIdExist,
     isCategoryExist,
-    isProductExist
+    isProductExist,
+    coleccionesPermitidas
 }
